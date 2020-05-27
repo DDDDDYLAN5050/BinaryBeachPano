@@ -35,14 +35,14 @@ function setup() {
 
 
   textureText = createGraphics(2000, 600);
-  textureText.background(255);
+  // textureText.background(255);
   textureText.rotate(PI/2);
   textureText.translate(0,-800);
   textureText.fill(color(20,60,90));
   // textureText.textFont('Helvetica');
   textureText.textStyle(BOLD);
   textureText.textSize(18);
-  textureText.noStroke();
+  textureText.stroke(128);
   // textureText.resize(2000,-600);
 
 
@@ -76,13 +76,13 @@ function draw() {
 
   // image(textureText,0,0);
   if (frameCount % 200 == 0) {
-    textureText.fill(255);
-    textureText.rect(0, 760-(frameCount / 10) % textureText.width,textureText.width,40);
+    // textureText.fill(255);
+    // textureText.rect(0, 760-(frameCount / 10) % textureText.width,textureText.width,40);
     textureText.fill(color(20,60,90));
     textureText.text(random(text), 10, 800-(frameCount / 10) % textureText.width);
   }
   push();
-    blendMode(DARKEST);
+    // blendMode(DARKEST);
   // rotateX(frameCount / 5);
   rotateZ(90);
   rotateY(200-frameCount / 50);
