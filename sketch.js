@@ -3,8 +3,8 @@ var n = 0;
 var bgimg = [];
 let cam;
 var textureSand;
-let text, textureText;
-
+let text, textureText, textureText2;
+var ry = 0;
 function preload() {
   for (i = 0; i < 33; i++) {
     var img = loadImage("./assets/sand" + i + ".jpg");
@@ -51,12 +51,21 @@ function setup() {
   textureText.strokeWeight(2);
   // textureText.resize(2000,-600);
 
+  textureText2 = createGraphics(2000, 25);
+  // textureText2.background(255);
+  textureText2.stroke(color(51, 102, 102));
+  textureText2.fill(color(153, 153, 51));
+  textureText2.textStyle(NORMAL);
+  textureText2.textSize(15);
+  textureText2.text(text[0], 10, 10);
+
+
 
   textureSand = createGraphics(6000, 300);
   var sumX = 0;
   for (i = 0; i < imgArchive.length; i++) {
-    textureSand.image(imgArchive[i], sumX, textureSand.height / 2,imgArchive[i].width/2,imgArchive[i].height/2);
-    sumX += imgArchive[i].width/2 + 5;
+    textureSand.image(imgArchive[i], sumX, textureSand.height / 2, imgArchive[i].width / 2, imgArchive[i].height / 2);
+    sumX += imgArchive[i].width / 2 + 5;
   }
 
   // put setup code here
@@ -77,7 +86,7 @@ function draw() {
 
   // image(bgimg, 0, 0, width, height);
   if (frameCount % 600 == 0) {
-    texture(bgimg[int(random(0, 7))]);
+    texture(random(bgimg));
   }
   noStroke();
   push();
@@ -85,17 +94,24 @@ function draw() {
   sphere(3000);
   pop();
 
+
+
+  ry += (mouseX-width/2) / width*3;
   push();
-  rotateY(frameCount / 20);
+  rotateY(ry / 10);
   texture(textureSand);
   translate(0, 200, 0);
   cylinder(2500, 1000, 24, 1, false, false);
   pop();
   // image(textureText,0,0);
+
+
+
+
   if (frameCount % 250 == 0) {
-      if (frameCount % 20000 == 0) {
-        textureText.clear();
-      }
+    if (frameCount % 20000 == 0) {
+      textureText.clear();
+    }
     // textureText.fill(255);
     // textureText.rect(0, 760-(frameCount / 10) % textureText.width,textureText.width,40);
     textureText.fill(color(20, 60, 90));
@@ -113,7 +129,15 @@ function draw() {
   // blendMode(BLEND);
   pop();
 
-
+  push();
+  // blendMode(MULTIPLY);
+  rotateY(180 + frameCount / 5);
+  texture(textureText2);
+  translate(0, sin(frameCount/50)*200-600, 0);
+  scale(-1, 1, 1);
+  cylinder(1000, 100, 24, 1, false, false);
+  // blendMode(BLEND);
+  pop();
 
 
   // landscape();
