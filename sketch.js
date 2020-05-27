@@ -90,7 +90,7 @@ function draw() {
   translate(0, 500, 0);
   scale(1,-1,1);
   cylinder(1500, 2400, 24, 1, false, false);
-  blendMode(BLEND);
+  // blendMode(BLEND);
   pop();
 
   push();
